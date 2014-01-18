@@ -1,6 +1,6 @@
+.classpath
 bin/
 gen/
 libs/
 .settings/
-.classpath
 *.swp
