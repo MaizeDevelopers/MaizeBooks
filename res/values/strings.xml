@@ -4,5 +4,23 @@
     <string name="app_name">MaizeBooks</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    
+    <string-array name="nav_drawer_items">
+        <item >Home</item>
+        <item >My Profile</item>
+        <item >Wish List</item>
+        <item >Selling</item>
+        <item >Purchase History</item>
+    </string-array>
+    
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_menu_home</item>
+        <item>@drawable/ic_menu_manage</item>
+        <item>@drawable/ic_menu_star</item>
+        <item>@drawable/ic_menu_share</item>
+        <item>@drawable/ic_menu_recent_history</item>
+    </array>
+   
+    <string name="li_item_desc">Icon</string>
 
 </resources>
