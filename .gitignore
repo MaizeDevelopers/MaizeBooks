@@ -4,3 +4,4 @@ gen/
 .settings/
 *.swp
 *~
+/bin
