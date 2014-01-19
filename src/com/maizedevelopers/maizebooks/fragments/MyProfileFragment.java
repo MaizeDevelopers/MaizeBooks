@@ -1,4 +1,4 @@
-package com.maizedevelopers.maizebooks;
+package com.maizedevelopers.maizebooks.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.maizedevelopers.maizebooks.R;
 
 public class MyProfileFragment extends Fragment {
 	

@@ -3,18 +3,26 @@
 
     <string name="app_name">MaizeBooks</string>
     
-    <!-- Home Fragment -->
+    <!-- My Profile Fragment -->
     <string name="btn_save">Save</string>
     <string name="hint_full_name">Full Name</string>
     <string name="hint_email_id">Email Address</string>
     <string name="img_desc">Profile Picture</string>
     
+  	<!-- Home Fragment -->
+  	<string name="hint_search">Search</string>
+    <string-array name="spn_tag">
+        <item>ISBN</item>
+        <item>Title</item>
+        <item>Author</item>
+    </string-array>
+    
     <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >My Profile</item>
-        <item >Wish List</item>
-        <item >Selling</item>
-        <item >Purchase History</item>
+        <item>Home</item>
+        <item>My Profile</item>
+        <item>Wish List</item>
+        <item>Selling</item>
+        <item>Purchase History</item>
     </string-array>
     
     <array name="nav_drawer_icons">

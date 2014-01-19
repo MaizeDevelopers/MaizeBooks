@@ -25,6 +25,11 @@ import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerItem;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerListAdapter;
+import com.maizedevelopers.maizebooks.fragments.HomeFragment;
+import com.maizedevelopers.maizebooks.fragments.MyProfileFragment;
+import com.maizedevelopers.maizebooks.fragments.PurchaseHistoryFragment;
+import com.maizedevelopers.maizebooks.fragments.SellingFragment;
+import com.maizedevelopers.maizebooks.fragments.WishListFragment;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
