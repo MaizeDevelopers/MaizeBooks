@@ -2,8 +2,12 @@
 <resources>
 
     <string name="app_name">MaizeBooks</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <!-- Home Fragment -->
+    <string name="btn_save">Save</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="hint_email_id">Email Address</string>
+    <string name="img_desc">Profile Picture</string>
     
     <string-array name="nav_drawer_items">
         <item >Home</item>
@@ -21,9 +25,8 @@
         <item>@drawable/ic_menu_recent_history</item>
     </array>
    
-    <string name="li_item_desc">Icon</string>
-    <string name="APP_ID">1430874753814511</string>
+    <!-- Misc. -->
+    <string name="li_item_desc">Icon</string>   
     <string name="str_login_with_fb">Login With Facebook</string>
-    <string name="str_logout_with_fb">Logout from Facebook</string>
 
 </resources>
