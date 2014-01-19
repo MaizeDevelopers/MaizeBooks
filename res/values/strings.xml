@@ -24,5 +24,6 @@
     <string name="li_item_desc">Icon</string>
     <string name="APP_ID">1430874753814511</string>
     <string name="str_login_with_fb">Login With Facebook</string>
+    <string name="str_logout_with_fb">Logout from Facebook</string>
 
 </resources>
