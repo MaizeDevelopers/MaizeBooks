@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -17,9 +19,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.FacebookError;
+import com.facebook.android.Facebook.DialogListener;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerItem;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerListAdapter;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
 	
 	private ListView mDrawerList;
@@ -34,6 +41,11 @@ public class MainActivity extends Activity {
 
 	private NavDrawerListAdapter adapter;
 	private ArrayList<NavDrawerItem> navDrawerItems;
+	
+	private static SharedPreferences mPreferences;
+	
+	private static String APP_ID = "1430874753814511";	
+	private Facebook mFacebook = new Facebook(APP_ID);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +111,43 @@ public class MainActivity extends Activity {
 			displayView(position);
 		}
 	}
+	
+	public void loginToFacebook() {
+		mPreferences = getPreferences(MODE_PRIVATE);
+		String access_token = mPreferences.getString("access_token", null);
+		long expires = mPreferences.getLong("access_expires", 0);
+		
+		if (expires != 0) {
+			mFacebook.setAccessExpires(expires);
+		}
+
+		if (access_token != null) {
+			mFacebook.setAccessToken(access_token);
+		}
+		
+		if (!mFacebook.isSessionValid()) {
+			mFacebook.authorize(MainActivity.this, new String[] {"email", "publish_stream"}, new DialogListener() {			
+				@Override
+				public void onCancel() { }
+			
+				@Override
+				public void onComplete(Bundle values) {
+					SharedPreferences.Editor editor = mPreferences.edit();
+					
+					editor.putString("access_token", mFacebook.getAccessToken());
+					editor.putLong("access_expires", mFacebook.getAccessExpires());
+					
+					editor.commit();
+				}
+			
+				@Override
+				public void onError(DialogError error) { }
+			
+				@Override
+				public void onFacebookError(FacebookError fberror) { }
+			});
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,10 +162,20 @@ public class MainActivity extends Activity {
 		}
 		
 		switch (item.getItemId()) {
+		case R.id.secure_connect_scan:
+			loginToFacebook();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		mFacebook.authorizeCallback(requestCode, resultCode, data);
+	}
+
 
 	private void displayView(int position) {
 		Fragment fragment = null;
