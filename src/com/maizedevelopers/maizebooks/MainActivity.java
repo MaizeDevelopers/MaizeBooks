@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -14,15 +12,10 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.facebook.android.DialogError;
-import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerItem;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerListAdapter;
 import com.maizedevelopers.maizebooks.fragments.HomeFragment;
@@ -31,10 +24,8 @@ import com.maizedevelopers.maizebooks.fragments.PurchaseHistoryFragment;
 import com.maizedevelopers.maizebooks.fragments.SellingFragment;
 import com.maizedevelopers.maizebooks.fragments.WishListFragment;
 
-@SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
 	
-	private Menu mMenu;
 	private ListView mDrawerList;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -47,11 +38,6 @@ public class MainActivity extends Activity {
 	
 	private NavDrawerListAdapter adapter;
 	private ArrayList<NavDrawerItem> navDrawerItems;
-	
-	private static SharedPreferences mPreferences;
-	
-	private static String APP_ID = "1430874753814511";	
-	public static Facebook mFacebook = new Facebook(APP_ID);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,74 +103,11 @@ public class MainActivity extends Activity {
 			displayView(position);
 		}
 	}
-	
-	public void loginToFacebook() {
-		if (!mFacebook.isSessionValid()) {
-			mFacebook.authorize(MainActivity.this, new String[] {"email", "publish_stream"}, new DialogListener() {			
-				@Override
-				public void onCancel() { }
-			
-				@Override
-				public void onComplete(Bundle values) {
-					SharedPreferences.Editor editor = mPreferences.edit();
-					
-					editor.putString("access_token", mFacebook.getAccessToken());
-					editor.putLong("access_expires", mFacebook.getAccessExpires());
-					
-					editor.commit();
-					
-					mMenu.findItem(R.id.fb_connect).setVisible(false);
-				}
-			
-				@Override
-				public void onError(DialogError error) { }
-			
-				@Override
-				public void onFacebookError(FacebookError fberror) { }
-			});
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		mMenu = menu;
-		
-		mPreferences = getPreferences(MODE_PRIVATE);
-		String access_token = mPreferences.getString("access_token", null);
-		long expires = mPreferences.getLong("access_expires", 0);
-		
-		if(expires != 0) {
-			mFacebook.setAccessExpires(expires);
-		}
-
-		if(access_token != null) {
-			mFacebook.setAccessToken(access_token);
-			mMenu.findItem(R.id.fb_connect).setVisible(false);
-		}
-		
+		getMenuInflater().inflate(R.menu.main, menu);		
 		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		
-		switch (item.getItemId()) {
-		case R.id.fb_connect:
-			loginToFacebook();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		mFacebook.authorizeCallback(requestCode, resultCode, data);
 	}
 
 	private void displayView(int position) {
