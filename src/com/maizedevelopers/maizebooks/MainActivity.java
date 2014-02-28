@@ -12,9 +12,11 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.maizedevelopers.maizebooks.adapters.NavDrawerItem;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerListAdapter;
@@ -48,6 +50,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void setupControl(Bundle savedInstanceState) {
+		
 		mTitle = mDrawerTitle = getTitle();
 		
 		navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
@@ -71,23 +74,24 @@ public class MainActivity extends Activity {
 
 		adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
 		mDrawerList.setAdapter(adapter);
-
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_go,
 				R.string.app_name,
-				R.string.app_name
+				R.string.btn_save
 		) {
 			public void onDrawerClosed(View view) {
+				super.onDrawerClosed(view);
 				getActionBar().setTitle(mTitle);
-				invalidateOptionsMenu();
+				//invalidateOptionsMenu();
 			}
 
 			public void onDrawerOpened(View drawerView) {
+				super.onDrawerOpened(drawerView);
 				getActionBar().setTitle(mDrawerTitle);
-				invalidateOptionsMenu();
+				//invalidateOptionsMenu();
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -164,4 +168,15 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+          return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
 }
