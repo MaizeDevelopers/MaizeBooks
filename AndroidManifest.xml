@@ -16,15 +16,23 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!--  Splash Screen opens first -->
         <activity
-            android:name="com.maizedevelopers.maizebooks.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.maizedevelopers.maizebooks.SplashScreen"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--  Main Activity -->
+        <activity
+            android:name="com.maizedevelopers.maizebooks.MainActivity"
+            android:label="@string/app_name" >
+       	</activity>
     </application>
 
 </manifest>
