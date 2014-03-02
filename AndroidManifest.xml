@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme" >
         <!--  Splash Screen opens first -->
         <activity
-            android:name="com.maizedevelopers.maizebooks.SplashScreen"
+            android:name="com.maizedevelopers.maizebooks.fragments.ScreenSlidePagerActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar">
