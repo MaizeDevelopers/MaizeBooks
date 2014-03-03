@@ -19,13 +19,16 @@ import android.widget.ListView;
 
 import com.maizedevelopers.maizebooks.adapters.NavDrawerItem;
 import com.maizedevelopers.maizebooks.adapters.NavDrawerListAdapter;
-import com.maizedevelopers.maizebooks.fragments.HomeFragment;
-import com.maizedevelopers.maizebooks.fragments.MyProfileFragment;
-import com.maizedevelopers.maizebooks.fragments.PurchaseHistoryFragment;
-import com.maizedevelopers.maizebooks.fragments.SellingFragment;
-import com.maizedevelopers.maizebooks.fragments.WishListFragment;
+import com.maizedevelopers.maizebooks.fragments.Home;
+import com.maizedevelopers.maizebooks.fragments.MyProfile;
+import com.maizedevelopers.maizebooks.fragments.PurchaseHistory;
+import com.maizedevelopers.maizebooks.fragments.Selling;
+import com.maizedevelopers.maizebooks.fragments.WishList;
 
 public class MainActivity extends Activity {
+	
+	private static final boolean D = false;
+	private static final String TAG = "MaizeBooks";
 	
 	private ListView mDrawerList;
 	private DrawerLayout mDrawerLayout;
@@ -42,13 +45,22 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		String DEBUG_TAG = "MainActivity.onCreate()";		
+		if(D) Log.d(TAG, DEBUG_TAG);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Setting up Fragments...");
 		
 		setupControl(savedInstanceState);
 	}
 	
 	private void setupControl(Bundle savedInstanceState) {
+		
+		String DEBUG_TAG = "MainActivity.setupControl()";		
+		if(D) Log.d(TAG, DEBUG_TAG);
 		
 		mTitle = mDrawerTitle = getTitle();
 		
@@ -68,7 +80,11 @@ public class MainActivity extends Activity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));	
 
 		navMenuIcons.recycle();
-
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Fragments Setup Complete");
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Setting up the Navigation Drawer");
+		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
 		adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
@@ -92,6 +108,8 @@ public class MainActivity extends Activity {
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Navigation Drawer Setup Complete");
 
 		if (savedInstanceState == null) {
 			displayView(0);
@@ -107,6 +125,8 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		if(D) Log.d(TAG, "MainActivity.onCreateOptionsMenu()");
+		
 		getMenuInflater().inflate(R.menu.main, menu);		
 		return true;
 	}
@@ -116,19 +136,19 @@ public class MainActivity extends Activity {
 		
 		switch (position) {
 		case 0:
-			fragment = new HomeFragment();
+			fragment = new Home();
 			break;
 		case 1:
-			fragment = new MyProfileFragment();
+			fragment = new MyProfile();
 			break;
 		case 2:
-			fragment = new WishListFragment();
+			fragment = new WishList();
 			break;
 		case 3:
-			fragment = new SellingFragment();
+			fragment = new Selling();
 			break;
 		case 4:
-			fragment = new PurchaseHistoryFragment();
+			fragment = new PurchaseHistory();
 			break;
 
 		default:
@@ -143,8 +163,6 @@ public class MainActivity extends Activity {
 			mDrawerList.setSelection(position);
 			setTitle(navMenuTitles[position]);
 			mDrawerLayout.closeDrawer(mDrawerList);
-		} else {
-			Log.e("MainActivity", "Error in creating fragment");
 		}
 	}
 
@@ -156,24 +174,25 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
+		if(D) Log.d(TAG, "MainActivity.onPostCreate()");
+		
 		super.onPostCreate(savedInstanceState);
 		mDrawerToggle.syncState();
 	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
+		if(D) Log.d(TAG, "MainActivity.onConfigurationChanged()");
+		
 		super.onConfigurationChanged(newConfig);
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
         if (mDrawerToggle.onOptionsItemSelected(item)) {
           return true;
         }
-        // Handle your other action bar items...
-
+        
         return super.onOptionsItemSelected(item);
     }
 }

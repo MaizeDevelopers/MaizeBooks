@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import android.widget.EditText;
 
 import com.maizedevelopers.maizebooks.R;
 
-public class MyProfileFragment extends Fragment {
+public class MyProfile extends Fragment {
+	
+	private static final boolean D = false;
+	private static final String TAG = "MaizeBooks";
 	
 	Button btnSave;
 	EditText etFullName;
@@ -21,11 +25,15 @@ public class MyProfileFragment extends Fragment {
 	
 	SharedPreferences mPreferences;
 	
-	public MyProfileFragment() { }
+	public MyProfile() { }
 	
 	@Override
 	@SuppressLint("CommitPrefEdits")
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		String DEBUG_TAG = "Fragments.MyProfile.onCreateView()";
+		if(D) Log.d(TAG, DEBUG_TAG);
+		
         View rootView = inflater.inflate(R.layout.my_profile, container, false);    
         
         btnSave = (Button) rootView.findViewById(R.id.btn_save);

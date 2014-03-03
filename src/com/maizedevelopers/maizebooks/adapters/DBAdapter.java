@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBAdapter {
+	
+	private static final boolean D = false;
+	private static final String TAG = "MaizeBooks";
 	
 	public static class TextBook {
 		String ISBN;
@@ -77,6 +81,9 @@ public class DBAdapter {
 	}
 	
 	public long insertRow(TextBook textbook) {
+		
+		String DEBUG_TAG = "Adapters.DBAdapter.insertRow()";
+		if(D) Log.d(TAG, DEBUG_TAG);
 
 		ContentValues initialValues = new ContentValues();
 		
@@ -87,6 +94,8 @@ public class DBAdapter {
 		initialValues.put(KEY_CONDITION, textbook.Condition);
 		initialValues.put(KEY_PRICE_MIN, textbook.MinimumPrice);
 		initialValues.put(KEY_PRICE_MAX, textbook.MaximumPrice);
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Inserted \"" + textbook.Title + "\"");
 		
 		return mDB.insert(DATABASE_TABLE, null, initialValues);
 	}
@@ -130,6 +139,10 @@ public class DBAdapter {
 	}
 	
 	public boolean updateRow(long rowId, TextBook textbook) {
+		
+		String DEBUG_TAG = "Adapters.DBAdapter.updateRow()";
+		if(D) Log.d(TAG, DEBUG_TAG);
+		
 		String where = KEY_ROWID + "=" + rowId;
 
 		ContentValues newValues = new ContentValues();
@@ -141,6 +154,8 @@ public class DBAdapter {
 		newValues.put(KEY_CONDITION, textbook.Condition);
 		newValues.put(KEY_PRICE_MIN, textbook.MinimumPrice);
 		newValues.put(KEY_PRICE_MAX, textbook.MaximumPrice);
+		
+		if(D) Log.d(TAG, DEBUG_TAG + ": Updated \"" + textbook.Title + "\"");
 		
 		return mDB.update(DATABASE_TABLE, newValues, where, null) != 0;
 	}

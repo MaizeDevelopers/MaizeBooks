@@ -16,9 +16,10 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <!--  Splash Screen opens first -->
         <activity
-            android:name="com.maizedevelopers.maizebooks.fragments.ScreenSlidePagerActivity"
+            android:name="com.maizedevelopers.maizebooks.SplashActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar">
@@ -28,11 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <!--  Main Activity -->
         <activity
             android:name="com.maizedevelopers.maizebooks.MainActivity"
             android:label="@string/app_name" >
        	</activity>
+       	
     </application>
 
 </manifest>
