@@ -38,7 +38,8 @@ public class SplashActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
         
         if(D) Log.d(TAG, DEBUG_TAG + ": Fragments Initialized...");
-    }
+      }
+        
 
     @Override
     public void onBackPressed() {
