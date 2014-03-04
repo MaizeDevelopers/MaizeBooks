@@ -5,3 +5,4 @@ gen/
 *.swp
 *~
 /bin
+/project.properties

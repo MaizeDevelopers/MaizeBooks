@@ -27,7 +27,7 @@ import com.maizedevelopers.maizebooks.fragments.WishList;
 
 public class MainActivity extends Activity {
 	
-	private static final boolean D = false;
+	private static final boolean D = true;
 	private static final String TAG = "MaizeBooks";
 	
 	private ListView mDrawerList;
