@@ -27,7 +27,7 @@ import com.maizedevelopers.maizebooks.fragments.WishList;
 
 public class MainActivity extends Activity {
 	
-	private static final boolean D = false;
+	private static final boolean D = true;
 	private static final String TAG = "MaizeBooks";
 	
 	private ListView mDrawerList;
@@ -86,12 +86,13 @@ public class MainActivity extends Activity {
 		if(D) Log.d(TAG, DEBUG_TAG + ": Setting up the Navigation Drawer");
 		
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
-
+		
 		adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
 		mDrawerList.setAdapter(adapter);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if(D) Log.d(TAG, DEBUG_TAG + ": setDisplayHomeAsUpEnabled");
 		getActionBar().setHomeButtonEnabled(true);
-
+		
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_go,
 				R.string.app_name,

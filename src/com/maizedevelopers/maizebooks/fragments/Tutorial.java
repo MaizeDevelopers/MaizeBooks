@@ -17,9 +17,11 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
+import com.maizedevelopers.maizebooks.MainActivity;
 import com.maizedevelopers.maizebooks.R;
 
 public class Tutorial extends Fragment {
+	
 	private static final boolean D = false;
 	private static final String TAG = "MaizeBooks";
 	private UiLifecycleHelper uiHelper;
@@ -55,7 +57,8 @@ public class Tutorial extends Fragment {
 	                    Log.i(TAG, user.getName()+" ***** "+user.getBirthday());
 
 	                    Toast.makeText(getActivity(), "Logged In", Toast.LENGTH_LONG).show();
-
+	                    Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+	                    startActivity(intent);
 	                }
 	            }
 	        }).executeAsync();
